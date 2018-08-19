@@ -30,6 +30,20 @@
           <% Alchemy::Tinymce.init.each do |k, v| %>
           <%= k %>: <%== v.to_json %>,
           <% end %>
+          file_browser_callback: function(field_name, url, type, win) {
+            tinymce.activeEditor.windowManager.open({
+              file: '/elfinder_manager',// use an absolute path!
+              title: 'elFinder 2.0',
+              width: 900,
+              height: 450,
+              resizable: 'yes'
+            }, {
+              setUrl: function (url) {
+                win.document.getElementById(field_name).value = url.url;
+              }
+            });
+            return false;
+          }
         }
       };
     </script>
